@@ -1,4 +1,4 @@
-[中文](#zh)|[英文](#en)
+[中文](#zh)|[English](#en)
 <p id="zh"></p>
 
 # 中文Readme
