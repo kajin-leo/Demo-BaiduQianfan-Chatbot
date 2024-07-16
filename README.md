@@ -94,7 +94,7 @@ Please specify your `LangChain API Key` and `Baidu Qianfan AK & SK` in `main.py`
 
 ## Using HTTP Requests
 Since the author is not familiar with B/S developing and PHP was mainly used in the company where the author had internship, all the following referral scripts are wrote in PHP. 
-### Clear Up the Vector Database & Check the Vector Database
+### Clear the Vector Database & Check the Vector Database
 ```php
 function callChatBotAPI($operation){ //$operation should only be in 'clear' or 'check'
     $url = "http://localhost:8204/chatbot/{$operation}";
