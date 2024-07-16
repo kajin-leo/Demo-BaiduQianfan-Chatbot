@@ -32,7 +32,7 @@ kwargs = {
 }
 model = QianfanLLMEndpoint(model=llm_model_name, streaming=True, init_kwargs=kwargs)
 embeddings = QianfanEmbeddingsEndpoint(model=embeddings_model_name)
-persist_directory = "/chromadb"
+persist_directory = ".venv/chromadb"
 qianfan.enable_log()
 
 
@@ -74,7 +74,7 @@ class ChatBot:
 
         if len(docs_to_upload) == 0:
             logging.info(f"没有需要上传的文档")
-            yield json.dumps({"output": "finished - no changes made"})
+            yield json.dumps({"output": "finished - no changes made", "status": "finished"})
             return
 
         logging.info(f"文档长度：{len(docs)}")
@@ -101,7 +101,7 @@ class ChatBot:
                                           persist_directory=persist_directory)
                 time.sleep(0.6)
                 logging.info(f"当前进度：{i}/{len(splits)}")
-                yield json.dumps({"output": f"进度{i/len(splits)*100:.2f}%"})
+                yield json.dumps({"output": f"进度{i/len(splits)*100:.2f}%", "status": "active"})
                 i += 1
             logging.info("文本切片已全部上传")
         else:
@@ -114,7 +114,7 @@ class ChatBot:
         test_text = "这是一条测试文本"
         test_embedding = embeddings.embed_query(test_text)
         logging.info(f"嵌入检查：{len(test_embedding)}")
-        yield json.dumps({"output": "uploaded"})
+        yield json.dumps({"output": "uploaded", "status": "finished"})
         return
 
     @staticmethod
@@ -161,7 +161,7 @@ class ChatBot:
             qa_chain_prompt = PromptTemplate(input_variables=["context", "question"], template=system_prompt[0])
             chain = qa_chain_prompt | model
             for chunk in chain.stream({"context": context, "question": query_content}):
-                yield json.dumps({"output": chunk})
+                yield json.dumps({"output": chunk, "status": "active"})
         else:
             qa_chain_prompt = ChatPromptTemplate.from_messages(
                 [
@@ -171,7 +171,8 @@ class ChatBot:
             )
             chain = qa_chain_prompt | model
             for chunk in chain.stream({"message": [HumanMessage(content=query_content)]}):
-                yield json.dumps({"output": chunk})
+                yield json.dumps({"output": chunk, "status": "active"})
+        return json.dumps({"output": "", "status": "finished"})
 
 
 @chatbot_api.route("/clear", methods=["POST"])
