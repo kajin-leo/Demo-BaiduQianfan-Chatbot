@@ -18,8 +18,6 @@ from langchain_community.llms import QianfanLLMEndpoint
 from langchain_core.messages import HumanMessage
 from langchain_core.prompts import PromptTemplate, ChatPromptTemplate, MessagesPlaceholder
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
-from langchain.chains.combine_documents import create_stuff_documents_chain
 
 app = Flask(__name__)
 chatbot_api = Blueprint('chatbot', __name__)
