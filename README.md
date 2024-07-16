@@ -10,7 +10,8 @@
 项目的虚拟环境为`.venv`目录，在`.venv`目录下会有一个名为`hash.json`的文件以及一个`data`文件夹。`hash.json`文件是用于实现RAG模式的知识库增量上传的辅助文件。`data`文件夹下存有知识库数据源的`.csv`文件。
 
 目前Demo中只使用了`CSVLoader`来读取知识库，如果有需要的其他格式，可以参考[LangChain的Loader介绍](https://python.langchain.com/v0.2/docs/how_to/#document-loaders)进行添加和修改。
-
+## 开始之前
+在`main.py`的25行至27行，请首先输入您的`LangChain API Key`和`百度千帆AK与SK`！
 ## 通过网络请求与接口交互
 由于作者的实习单位主要使用PHP语言，作者也对B/S开发经验不足，这里只提供PHP语言的参考脚本。
 ### 清理数据库与检查数据库内数据量
@@ -87,6 +88,9 @@ This demo is a ChatBot based on `LangChain` and BaiduQianfan LLM, which contains
 ## Descriptions for Additional Files
 There is a directory called `.venv` to work as the virtual environment, containing a file named as `hash.json` and a directory named as `data`. `hash.json` is used to assist with uploading the wiki library incrementally. `data` directory stores wiki library files in `.csv` filename extension. 
 So far, the demo only imports and uses `CSVLoader` to load the wiki library. If any other file format is needed, you can take [LangChain Loaders Introduction](https://python.langchain.com/v0.2/docs/how_to/#document-loaders) as reference to modify the demo. 
+
+## Before You Start
+Please specify your `LangChain API Key` and `Baidu Qianfan AK & SK` in `main.py` from Line 25 to Line 27. 
 
 ## Using HTTP Requests
 Since the author is not familiar with B/S developing and PHP was mainly used in the company where the author had internship, all the following referral scripts are wrote in PHP. 
