@@ -29,7 +29,7 @@ function callChatBotAPI($operation){ //$operation是clear或check
         throw new Exception('Failed to interact with chatbot');
     }
     if ($operation == 'check') {
-        return json_decode($result, true)["library_name"] . json_decode($result, true)["library_count"]
+        return json_decode($result, true)["library_name"] . json_decode($result, true)["library_count"];
     }
     return json_decode($result, true)['output'];
 }
@@ -106,7 +106,7 @@ function callChatBotAPI($operation){ //$operation should only be in 'clear' or '
         throw new Exception('Failed to interact with chatbot');
     }
     if ($operation == 'check') {
-        return json_decode($result, true)["library_name"] . json_decode($result, true)["library_count"]
+        return json_decode($result, true)["library_name"] . json_decode($result, true)["library_count"];
     }
     return json_decode($result, true)['output'];
 }
